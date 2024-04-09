@@ -1,30 +1,41 @@
 <template>
-  <div>
-    {{ count }}
-  </div>
-  <h1>Vue.js 라이프사이클 테스트</h1>
+  <div>{{ rawHtml }}</div>
+  <div>{{ rawHtml2 }}</div>
+  <!-- html처럼 사용하기 위해서 -->
+  <h1 v-html="rawHtml2"></h1>
+
+  <h2 v-bind:class="{ active: isActive }">클래스 바인딩 테스트입니다.</h2>
+  <!-- 축약형 -->
+  <h2 :class="{ active: isActive }">클래스 바인딩 테스트입니다.</h2>
+  <button @click="change">버튼</button>
+
+  <h3 style="color: red; font-size: 24px">스타일 바인딩 테스트입니다.</h3>
+  <h3 :style="{ color: fontColor, fontSize: fontSize + 'px' }">
+    스타일 바인딩 테스트입니다.
+  </h3>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      count: 0,
+      rawHtml: "이것은 텍스트입니다.",
+      rawHtml2: '<span style="color: red">이것은 빨간색이어야 합니다.</span>',
+      isActive: false,
+      fontColor: "#888888",
+      fontSize: 48,
     };
   },
-  beforeCreate() {
-    console.log("lifeCycle is beforeCreate", this.count);
-  },
-  created() {
-    console.log("lifeCycle is created", this.count);
-  },
-  beforeMount() {
-    console.log("lifeCycle is beforeMount", document.querySelector("h1"));
-  },
-  mounted() {
-    console.log("lifeCycle is mounted", document.querySelector("h1"));
+  methods: {
+    change() {
+      this.isActive = !this.isActive;
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+h2.active {
+  color: green;
+}
+</style>
