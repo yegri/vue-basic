@@ -1,31 +1,28 @@
 <template>
   <div>
     <ChildComponent
-      v-bind:sendProps1="title"
-      v-bind:sendProps2="createdAt"
-      v-bind:sendProps3="obj"
+      :sendProps1="title"
+      :sendProps2="createdAt"
+      :sendProps3="obj"
     />
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { reactive, ref } from "vue";
 import ChildComponent from "./components/ChildComponent.vue";
 
-export default {
-  components: {
-    ChildComponent,
-  },
-  data() {
-    return {
-      title: "부모 컴포넌트에서 선언된 데이터입니다.",
-      createdAt: 2024,
-      obj: {
-        id: 2024,
-        name: "John",
-      },
-    };
-  },
-};
+interface Obj {
+  id: number;
+  name: string;
+}
+
+const title = ref<string>("부모컴포넌트에서 선언된 데이터입니다.");
+const createdAt = ref<number>(2024);
+const obj = reactive<Obj>({
+  id: 2024,
+  name: "John",
+});
 </script>
 
 <style lang="scss" scoped></style>
