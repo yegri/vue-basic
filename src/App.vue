@@ -1,41 +1,22 @@
 <template>
-  <div>{{ rawHtml }}</div>
-  <div>{{ rawHtml2 }}</div>
-  <!-- html처럼 사용하기 위해서 -->
-  <h1 v-html="rawHtml2"></h1>
+  <div>
+    <button v-on:click="count++">인라인 핸들러</button>
+    <h1>{{ count }}</h1>
 
-  <h2 v-bind:class="{ active: isActive }">클래스 바인딩 테스트입니다.</h2>
-  <!-- 축약형 -->
-  <h2 :class="{ active: isActive }">클래스 바인딩 테스트입니다.</h2>
-  <button @click="change">버튼</button>
-
-  <h3 style="color: red; font-size: 24px">스타일 바인딩 테스트입니다.</h3>
-  <h3 :style="{ color: fontColor, fontSize: fontSize + 'px' }">
-    스타일 바인딩 테스트입니다.
-  </h3>
+    <button v-on:click="changeName">메서드 핸들러</button>
+    <h1>{{ name }}</h1>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      rawHtml: "이것은 텍스트입니다.",
-      rawHtml2: '<span style="color: red">이것은 빨간색이어야 합니다.</span>',
-      isActive: false,
-      fontColor: "#888888",
-      fontSize: 48,
+      count: 0,
+      name: "Vue.js",
     };
-  },
-  methods: {
-    change() {
-      this.isActive = !this.isActive;
-    },
   },
 };
 </script>
 
-<style scoped>
-h2.active {
-  color: green;
-}
-</style>
+<style lang="scss" scoped></style>
