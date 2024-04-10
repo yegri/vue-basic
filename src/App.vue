@@ -1,21 +1,26 @@
 <template>
   <div>
-    부모컴포넌트 레이아웃
-    <ChildComponent @send-event="parentEvent" />
+    <!-- 영어로 입력받을 때 -->
+    <input type="text" v-model="inputValue1" />
+
+    <!-- 한글을 입력받을 땐 이 방법이 권장됨 -->
+    <input
+      type="text"
+      :value="inputValue2"
+      @input="inputValue2 = $event.target.value"
+    />
   </div>
+  <div>{{ inputValue1 }}</div>
+  <div>{{ inputValue2 }}</div>
 </template>
 
 <script>
-import ChildComponent from "./components/ChildComponent.vue";
-
 export default {
-  components: {
-    ChildComponent,
-  },
-  methods: {
-    parentEvent(event) {
-      console.log(event);
-    },
+  data() {
+    return {
+      inputValue1: "",
+      inputValue2: "",
+    };
   },
 };
 </script>
